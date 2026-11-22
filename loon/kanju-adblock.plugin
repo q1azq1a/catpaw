@@ -1,0 +1,19 @@
+#!name=看剧AI去广告
+#!desc=移除看剧AI(kanju.ai)播放页与首页的广告：清空服务端下发的广告位数据（官方靠谱推荐等），并拦截广告落地页域名。需开启 MitM 并信任 Loon 证书。
+#!author=danf
+#!openUrl=https://kanju.ai/
+
+[Mitm]
+hostname = kanju.ai, *.kanju.ai, kanju10.com, *.kanju10.com, kanju13.com, *.kanju13.com
+
+[Script]
+http-response ^https://[a-zA-Z0-9.-]*kanju[a-zA-Z0-9.-]*/v1/runtime/bootstrap script-path=javascript:try{var o=JSON.parse($response.body);var p=o&&o.app_experience&&o.app_experience.placements;if(p){for(var k in p){var q=p[k];if(q){for(var j in q){if(Array.isArray(q[j]))q[j]=[]}}}}$done({body:JSON.stringify(o)})}catch(e){$done({})}, requires-body=true, timeout=10, tag=看剧AI去广告
+
+[Rule]
+DOMAIN-SUFFIX,84873578.com,REJECT
+DOMAIN-SUFFIX,38901379.com,REJECT
+DOMAIN-SUFFIX,13880264.com,REJECT
+DOMAIN-SUFFIX,56534737.com,REJECT
+DOMAIN-SUFFIX,33713752.com,REJECT
+DOMAIN-SUFFIX,52258077.com,REJECT
+DOMAIN-SUFFIX,bh8906.top,REJECT
