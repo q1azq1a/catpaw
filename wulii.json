@@ -8,7 +8,7 @@
       "key": "dmghg",
       "name": "动漫共和国",
       "type": 3,
-      "api": "https://raw.githubusercontent.com/q1azq1a/catpaw/main/dmghg.js",
+      "api": "https://cdn.jsdelivr.net/gh/q1azq1a/catpaw@main/dmghg.js",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0
