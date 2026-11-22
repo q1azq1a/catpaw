@@ -6,9 +6,8 @@
 // 注意:
 //  1. 本文件含该源内建的认证密钥与 RSA 私钥参数(与分发的猫爪包内完全一致), 不含它爬虫跑不起来;
 //     密钥本来就在公开分发的猫爪包里, 不是你的个人凭证, 但放到公开仓库即等于公开, 自行知晓。
-//  2. 未在真机(映匣)实测: 加解密逻辑已按原模块逐行移植, 并在本机用 Node 校验过 RSA(BigInt modexp)
-//     与 AES 加解密构造; 但上游接口未从本机验证通过, 以映匣实测为准。
-//  3. 分类目前只放了一个“全部”(频道 20, 原模块无分类时的默认频道); 更多频道可调 /pc/channel 后补进 class_url。
+//  2. 2026-11-22 已用 Node + 上游实测通过: /pc/channel 与 /pc/video/list(channel 20) 均返回 code 20000、24 条, 响应解密(RSA+AES)正确; 但未在真机(映匣/OK影视)实测, 播放签名仍为按原模块正则推断, 以真机为准。
+//  3. 分类为 /pc/channel 实测的 8 个频道: 日漫 20、国漫 21、剧场 22、美漫 23、特摄 25、少儿 32、动态漫 26、猜你想看 27。
 //  4. 依赖壳子 drpy 环境提供 CryptoJS、BigInt、base64Encode/Decode、request、setResult 等全局量。
 
 var rule = {
@@ -21,8 +20,8 @@ var rule = {
     quickSearch: 1,
     filterable: 0,
     double: false,
-    class_name: '全部',
-    class_url: '20',
+    class_name: '日漫&国漫&剧场&美漫&特摄&少儿&动态漫&猜你想看',
+    class_url: '20&21&22&23&25&32&26&27',
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -181,7 +180,9 @@ function apiDecrypt(body) {
 // 带认证头的 GET (rV)
 async function apiGet(path, params) {
     var ts = String(Date.now());
-    var auth = aesEncryptB64('0.1.0-' + ts + '-3-1.0.0-win32', AUTH_KEY, AUTH_IV);
+    // 原模块: 明文先 base64 再 AES 加密 (少了这层 base64, 服务端会报 code 30000“解码异常”)
+    var plainB64 = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse('0.1.0-' + ts + '-3-1.0.0-win32'));
+    var auth = aesEncryptB64(plainB64, AUTH_KEY, AUTH_IV);
     var url = BASE + path;
     var qs = [];
     for (var k in params) {
