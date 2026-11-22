@@ -4,10 +4,10 @@
 #!openUrl=https://kanju.ai/
 
 [Mitm]
-hostname = kanju.ai, *.kanju.ai, kanju10.com, *.kanju10.com, kanju13.com, *.kanju13.com
+hostname = kanju.ai, *.kanju.ai, kanju10.com, *.kanju10.com, kanju11.com, *.kanju11.com, kanju12.com, *.kanju12.com, kanju13.com, *.kanju13.com, kanju14.com, *.kanju14.com, kanju15.com, *.kanju15.com, kanju16.com, *.kanju16.com, kanju17.com, *.kanju17.com, kanju18.com, *.kanju18.com, kanju19.com, *.kanju19.com, kanju20.com, *.kanju20.com
 
 [Script]
-http-response ^https://[a-zA-Z0-9.-]*kanju[a-zA-Z0-9.-]*/v1/runtime/bootstrap script-path=javascript:try{var o=JSON.parse($response.body);var p=o&&o.app_experience&&o.app_experience.placements;if(p){for(var k in p){var q=p[k];if(q){for(var j in q){if(Array.isArray(q[j]))q[j]=[]}}}}$done({body:JSON.stringify(o)})}catch(e){$done({})}, requires-body=true, timeout=10, tag=看剧AI去广告
+http-response ^https://[a-zA-Z0-9.-]*kanju[a-zA-Z0-9.-]*/v1/runtime/bootstrap script-path=https://raw.githubusercontent.com/q1azq1a/catpaw/main/loon/kanju-adblock.js, requires-body=true, timeout=10, tag=看剧AI去广告
 
 [Rule]
 DOMAIN-SUFFIX,84873578.com,REJECT
