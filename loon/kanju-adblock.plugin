@@ -4,7 +4,7 @@
 #!openUrl=https://kanju.ai/
 
 [Mitm]
-hostname = kanju.ai, *.kanju.ai, kanju10.com, *.kanju10.com, kanju11.com, *.kanju11.com, kanju12.com, *.kanju12.com, kanju13.com, *.kanju13.com, kanju14.com, *.kanju14.com, kanju15.com, *.kanju15.com, kanju16.com, *.kanju16.com, kanju17.com, *.kanju17.com, kanju18.com, *.kanju18.com, kanju19.com, *.kanju19.com, kanju20.com, *.kanju20.com
+hostname = kanju.ai, *.kanju.ai, kanju10.com, *.kanju10.com, kanju11.com, *.kanju11.com, kanju12.com, *.kanju12.com, kanju13.com, *.kanju13.com, kanju14.com, *.kanju14.com, kanju15.com, *.kanju15.com, kanju16.com, *.kanju16.com, kanju17.com, *.kanju17.com, kanju18.com, *.kanju18.com, kanju19.com, *.kanju19.com, kanju20.com, *.kanju20.com, kanju21.com, *.kanju21.com, kanju22.com, *.kanju22.com, kanju23.com, *.kanju23.com, kanju24.com, *.kanju24.com, kanju25.com, *.kanju25.com, kanju26.com, *.kanju26.com, kanju27.com, *.kanju27.com, kanju28.com, *.kanju28.com, kanju29.com, *.kanju29.com, kanju30.com, *.kanju30.com
 
 [Script]
 http-response ^https://[a-zA-Z0-9.-]*kanju[a-zA-Z0-9.-]*/v1/runtime/bootstrap script-path=https://raw.githubusercontent.com/q1azq1a/catpaw/main/loon/kanju-adblock.js, requires-body=true, timeout=10, tag=看剧AI去广告
